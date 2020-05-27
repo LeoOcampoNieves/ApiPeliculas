@@ -13,6 +13,6 @@ namespace ApiPeliculas.Data
         {
         }
 
-        DbSet<Categoria> Categoria { get; set; }
+        public DbSet<Categoria> Categoria { get; set; }
     }
 }
