@@ -102,5 +102,25 @@ namespace ApiPeliculas.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{categoriaId:int}", Name = "BorrarCategoria")]
+        public IActionResult BorrarCategoria(int categoriaId)
+        {
+            if (!_ctRepo.ExisteCategoria(categoriaId))
+            {
+                return NotFound();
+            }
+
+            var categoria = _ctRepo.GetCategoria(categoriaId);
+
+            if (!_ctRepo.BorrarCategoria(categoria))
+            {
+                ModelState.AddModelError("", $"Algo salió mal borrando el registro{categoria.Nombre}");
+
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
     }
 }
